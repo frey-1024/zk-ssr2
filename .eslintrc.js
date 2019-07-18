@@ -30,6 +30,8 @@ module.exports = {
     'no-useless-escape': 0,
     'prefer-promise-reject-errors': 0,
     'generator-star-spacing': 'off',
-    'no-debugger': 0
+    'no-debugger': 0,
+    'promise/param-names': 0,
+    'no-eval': 0
   }
 };
