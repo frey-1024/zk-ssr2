@@ -27,21 +27,23 @@ module.exports = config => {
     // 配置各种loader
     module: {
       rules: [
-        // {
-        //   test: /\.(js|mjs|jsx)$/,
-        //   exclude: [resolve('node_modules')],
-        //   enforce: 'pre',
-        //   use: [
-        //     {
-        //       options: {
-        //         formatter: require.resolve('react-dev-utils/eslintFormatter'),
-        //         eslintPath: require.resolve('eslint'),
-        //         emitWarning: true
-        //       },
-        //       loader: require.resolve('eslint-loader')
-        //     }
-        //   ]
-        // },
+        {
+          test: /\.(js|mjs|jsx)$/,
+          exclude: [resolve('node_modules')],
+          enforce: 'pre',
+          use: [
+            {
+              options: {
+                formatter: require.resolve('react-dev-utils/eslintFormatter'),
+                eslintPath: require.resolve('eslint'),
+                emitWarning: true,
+                emitError: false,
+                quiet: true
+              },
+              loader: require.resolve('eslint-loader')
+            }
+          ]
+        },
         {
           oneOf: [
             {
