@@ -22,13 +22,13 @@ const clientConfig = merge(baseConfig(config), {
     new CopyWebpackPlugin([
       {
         from: resolve('static'),
-        to: resolve('dist/static')
+        to: resolve('build/static')
       }
     ]),
 
     new HtmlWebpackPlugin({
-      filename: 'server.tpl.html',
-      template: resolve('src/index.html')
+      filename: 'server.template.ejs',
+      template: resolve('src/server.template.ejs')
     })
   ]
 });

@@ -16,9 +16,9 @@ let readyPromise;
 
 if (isPro) {
   serverBundle = require('../build/js/server-bundle').default;
-  template = fs.readFileSync(resolve('../build/server.tpl.html'), 'utf-8');
+  template = fs.readFileSync(resolve('../build/server.template.ejs'), 'utf-8');
 } else {
-  readyPromise = require('../config/dev-server')(app, resolve('../src/index.html'));
+  readyPromise = require('../config/dev-server')(app, resolve('../src/server.template.ejs'));
 }
 
 router.get('*', async (ctx, next) => {

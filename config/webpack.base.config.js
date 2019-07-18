@@ -225,7 +225,8 @@ module.exports = config => {
               loader: `file-loader?name=${config.publicPath}fonts/${
                 config.noHash ? '[name].[ext]' : '[name].[hash:8]'
               }.[ext]`
-            }
+            },
+            { test: /\.ejs$/, loader: 'ejs-compiled-loader' }
           ]
         }
       ]
