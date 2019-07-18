@@ -18,7 +18,7 @@ if (isPro) {
   serverBundle = require('../dist/js/server-bundle').default;
   template = fs.readFileSync(resolve('../dist/server.tpl.html'), 'utf-8');
 } else {
-  readyPromise = require('../build/dev-server')(app, resolve('../app/index.html'));
+  readyPromise = require('../build/dev-server')(app, resolve('../src/index.html'));
 }
 
 router.get('*', async (ctx, next) => {
@@ -35,5 +35,5 @@ app.use(require('koa-static')(path.join(__dirname, '../dist')));
 app.use(router.routes(), router.allowedMethods());
 
 app.listen(config.port, () => {
-  console.log(`node服务已启动，服务地址为：locahost:${config.port}`);
+  console.log(`node服务已启动，服务地址为：localhost:${config.port}`);
 });

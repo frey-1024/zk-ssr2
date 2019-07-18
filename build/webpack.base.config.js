@@ -14,7 +14,7 @@ const sassModuleRegex = /\.module\.(scss|sass)$/;
 module.exports = config => {
   return {
     // 打包的入口文件
-    entry: resolve('app/main.js'),
+    entry: resolve('src/main.js'),
     // 打包的出口
     output: {
       path: resolve('dist'),
@@ -197,7 +197,7 @@ module.exports = config => {
             },
             {
               test: /\.less/,
-              include: [resolve('app')],
+              include: [resolve('src')],
               use: [
                 MiniCssExtractPlugin.loader,
                 {
@@ -233,7 +233,7 @@ module.exports = config => {
     resolve: {
       // 设置路径别名
       alias: {
-        '@': resolve('app')
+        '@': resolve('src')
       },
       // 文件后缀自动补全
       extensions: ['.js', '.jsx']

@@ -7,7 +7,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const config = require('./config')[process.env.NODE_ENV];
 
 const clientConfig = merge(baseConfig(config), {
-  entry: resolve('app/client-entry.js'),
+  entry: resolve('src/client-entry.js'),
   devtool: config.devtool,
   mode: config.env,
   plugins: [
@@ -28,7 +28,7 @@ const clientConfig = merge(baseConfig(config), {
 
     new HtmlWebpackPlugin({
       filename: 'server.tpl.html',
-      template: resolve('app/index.html')
+      template: resolve('src/index.html')
     })
   ]
 });
