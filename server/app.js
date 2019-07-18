@@ -7,7 +7,7 @@ const fs = require('fs');
 const resolve = file => path.resolve(__dirname, file);
 const app = new Koa();
 const env = process.env.NODE_ENV;
-const config = require('../build/config')[env];
+const config = require('../config/config')[env];
 const isPro = process.env.NODE_ENV === 'production';
 
 let serverBundle;
@@ -15,10 +15,10 @@ let template;
 let readyPromise;
 
 if (isPro) {
-  serverBundle = require('../dist/js/server-bundle').default;
-  template = fs.readFileSync(resolve('../dist/server.tpl.html'), 'utf-8');
+  serverBundle = require('../build/js/server-bundle').default;
+  template = fs.readFileSync(resolve('../build/server.tpl.html'), 'utf-8');
 } else {
-  readyPromise = require('../build/dev-server')(app, resolve('../src/index.html'));
+  readyPromise = require('../config/dev-server')(app, resolve('../src/index.html'));
 }
 
 router.get('*', async (ctx, next) => {
@@ -31,7 +31,7 @@ router.get('*', async (ctx, next) => {
   next();
 });
 
-app.use(require('koa-static')(path.join(__dirname, '../dist')));
+app.use(require('koa-static')(path.join(__dirname, '../build')));
 app.use(router.routes(), router.allowedMethods());
 
 app.listen(config.port, () => {

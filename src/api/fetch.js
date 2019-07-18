@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch';
-import config from '../../build/config';
+import config from '../../config/config';
 
 const base = config[process.env.NODE_ENV].api || '/api';
 
