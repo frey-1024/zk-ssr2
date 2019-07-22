@@ -34,6 +34,8 @@
         "react-router-config": "^5.0.0",
         "react-router-dom": "^4.3.1",
         "redux": "^4.0.1",
+        "redux-saga": "^1.0.5",
+        "redux-thunk": "^2.3.0",
         "serialize-javascript": "^1.7.0"
     },
     "devDependencies": {
