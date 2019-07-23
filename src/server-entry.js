@@ -4,12 +4,9 @@ import { Provider } from 'react-redux';
 import { matchRoutes } from 'react-router-config';
 import createApp from './createApp';
 
-export default ctx => {
+export default (ctx, browserData) => {
   return new Promise((resolve, reject) => {
     const { router, store, routerConfig } = createApp();
-    console.log(ctx.path);
-    console.log(ctx.url);
-    console.log(ctx.search);
     const routes = matchRoutes(routerConfig, ctx.path);
     // 如果没有匹配上路由则返回404
     if (routes.length <= 0) {
@@ -20,14 +17,15 @@ export default ctx => {
       // 等所有数据请求回来之后在render, 注意这里不能用ctx上的路由信息，要使用前端的路由信息
       promises = routes
         .filter(item => item.route.component.asyncData)
-        .map(item => item.route.component.asyncData(store, item.match));
+        .map(item =>
+          item.route.component.asyncData(store, { ...item.match, query: ctx.query }, browserData)
+        );
     } catch (e) {
       console.log(e);
     }
 
     Promise.all(promises)
       .then(() => {
-        console.log(store.getState());
         ctx.store = store; // 挂载到ctx上，方便渲染到页面上
         resolve(
           <Provider store={store}>

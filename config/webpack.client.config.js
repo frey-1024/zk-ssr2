@@ -4,6 +4,8 @@ const baseConfig = require('./webpack.base.config');
 const { resolve } = require('./utils');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const appEnv = require('./env');
+const env = appEnv.getWebEnvironment('/');
 const config = require('./config')[process.env.NODE_ENV];
 
 const clientConfig = merge(baseConfig(config), {
@@ -11,12 +13,7 @@ const clientConfig = merge(baseConfig(config), {
   devtool: config.devtool,
   mode: config.env,
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify(config.env),
-        VUE_ENV: '"client"'
-      }
-    }),
+    new webpack.DefinePlugin(env.stringified),
 
     // cp 静态资源
     new CopyWebpackPlugin([
