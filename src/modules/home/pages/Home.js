@@ -1,21 +1,19 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import serverConnect from '../../../highOrderComponents/serverConnect';
 import { userLogin } from '../actions/userActions';
 
-const mapStateToDispatch = dispatch => bindActionCreators({ userLogin }, dispatch);
-
-@connect(
+@serverConnect(
   state => {
     return {
       userInfo: state.userInfo
     };
   },
-  mapStateToDispatch
+  dispatch => bindActionCreators({ userLogin }, dispatch)
 )
 export default class Home extends React.Component {
-  static asyncData(store, match, browserData) {
-    const { userLogin } = mapStateToDispatch(store.dispatch);
+  static serverBootstrapper(methods, match, browserData) {
+    const { userLogin } = methods;
     return Promise.all([
       userLogin({
         country: 'china'

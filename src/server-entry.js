@@ -16,9 +16,13 @@ export default (ctx, browserData) => {
     try {
       // 等所有数据请求回来之后在render, 注意这里不能用ctx上的路由信息，要使用前端的路由信息
       promises = routes
-        .filter(item => item.route.component.asyncData)
+        .filter(item => item.route.component.serverBootstrapper)
         .map(item =>
-          item.route.component.asyncData(store, { ...item.match, query: ctx.query }, browserData)
+          item.route.component.serverBootstrapper(
+            store,
+            { ...item.match, query: ctx.query },
+            browserData
+          )
         );
     } catch (e) {
       console.log(e);
