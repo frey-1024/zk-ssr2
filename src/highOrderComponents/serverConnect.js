@@ -21,7 +21,7 @@ export default function serverConnect(...params) {
         return WrappedComponent.serverBootstrapper(methods, match, browserData);
       }
       render() {
-        return <WrappedComponent />;
+        return <WrappedComponent {...this.props} />;
       }
     }
     return connect(

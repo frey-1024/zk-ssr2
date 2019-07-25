@@ -15,7 +15,7 @@ let template;
 let readyPromise;
 
 if (isPro) {
-  serverBundle = require('../build/js/server-bundle').default;
+  serverBundle = require('../build/server-bundle').default;
   template = fs.readFileSync(resolve('../build/server.template.ejs'), 'utf-8');
 } else {
   readyPromise = require('../config/dev-server')(app, resolve('../src/server.template.ejs'));
