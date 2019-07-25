@@ -1,5 +1,6 @@
 const merge = require('webpack-merge');
 const webpack = require('webpack');
+const { ReactLoadablePlugin } = require('react-loadable/webpack');
 const baseConfig = require('./webpack.base.config');
 const { resolve } = require('./utils');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -22,6 +23,11 @@ const clientConfig = merge(baseConfig(config), {
 });
 
 if (process.env.NODE_ENV === 'production') {
+  clientConfig.plugins.push(
+    new ReactLoadablePlugin({
+      filename: 'build/react-loadable.json'
+    })
+  );
   clientConfig.optimization.splitChunks = {
     chunks: 'initial',
     minSize: 0,
