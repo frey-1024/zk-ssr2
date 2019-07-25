@@ -2,7 +2,6 @@ const merge = require('webpack-merge');
 const webpack = require('webpack');
 const baseConfig = require('./webpack.base.config');
 const { resolve } = require('./utils');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const appEnv = require('./env');
 const env = appEnv.getWebEnvironment('/');
@@ -14,14 +13,6 @@ const clientConfig = merge(baseConfig(config), {
   mode: config.env,
   plugins: [
     new webpack.DefinePlugin(env.stringified),
-
-    // cp 静态资源
-    new CopyWebpackPlugin([
-      {
-        from: resolve('static'),
-        to: resolve('build/static')
-      }
-    ]),
 
     new HtmlWebpackPlugin({
       filename: 'server.template.ejs',
